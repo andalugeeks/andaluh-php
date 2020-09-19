@@ -1,0 +1,36 @@
+{
+    "name": "andalugeeks/andaluh",
+    "description": "Transliterate español (spanish) spelling to andaluz proposals using PHP",
+    "keywords": [
+        "transliterate",
+        "andaluz",
+        "andaluh",
+        "sdk"
+    ],
+    "type": "library",
+    "license": "Apache-2.0",
+    "homepage": "https://github.com/LeonAlvarez/andaluh-php",
+    "authors": [
+        {
+            "name": "LeonAlvarez",
+            "homepage": "https://github.com/LeonAlvarez"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Andaluh\\": "lib/Andaluh"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "unit": "phpunit --testsuite unit",
+        "unit-debug": "phpunit --debug --testsuite unit"
+    }
+}
