@@ -7,5 +7,9 @@ use PHPUnit\Framework\TestCase;
 
 class ExceptionsRulesTest extends TestCase
 {
-    // TODO TEST
+    /** @test */
+    public function it_pass_basic_test()
+    {
+        $this->assertEquals('Tó', ExceptionsRules::apply('Todo'));
+    }
 }

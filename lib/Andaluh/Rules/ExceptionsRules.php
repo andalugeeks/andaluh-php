@@ -61,8 +61,9 @@ class ExceptionsRules extends BaseRule
 
     public static function apply(string $text): string
     {
+        var_dump('/\b(' .  implode('|', self::EXCEPTIONS) . ')\b/iu');
         return preg_replace_callback(
-            '/\b(' .  implode('|', self::EXCEPTIONS) . ')\b/iu',
+            '/\b(' .  implode('|', array_keys(self::EXCEPTIONS)) . ')\b/iu',
             function ($match) {
                 $word = $match[1];
                 return self::keepCase($word, self::EXCEPTIONS[self::toLowerCase($word)]);
