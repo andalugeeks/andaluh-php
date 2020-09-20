@@ -194,13 +194,12 @@ class WordEndingRules extends BaseRule
             );
         }
 
-        if (!self::containsTildeVowel($prefix)) {
-            $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
+        $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
+        if (!self::containsTildeVowel($suffix_vowel)) {
             return "{$prefix}{$unstressed}";
         }
 
-        $stressed = self::UNSTRESSED_RULES[$suffix_vowel];
-        return "{$prefix}{$stressed}" . self::keepCase($suffix_const, 'h');
+        return "{$prefix}{$unstressed}" . self::keepCase($suffix_const, 'h');
     }
 
     private static function replaceConstEndWithCase(array $match): string

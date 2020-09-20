@@ -13,7 +13,6 @@ class AndaluhEpaTest extends TestCase
     {
         $andaluh = new AndaluhEpa();
 
-        //TODO pass
         $this->assertEquals(
             'Tó Çenomorfo diçe: [abêh], que el Éççito y el éttaçî âffîççian, çi no erê un çilófono Xungo.',
             $andaluh->transliterate('Todo Xenomorfo dice: [haber], que el Éxito y el éxtasis asfixian, si no eres un xilófono Chungo.')
@@ -63,7 +62,6 @@ class AndaluhEpaTest extends TestCase
             'Lô ÇAGueçô XiGuaGUA comían cacaGuETê, FramBuEÇâ y Eno, ¡y ABLAN con álito de ÊPPANGLÎ!',
             $andaluh->transliterate('Los SABuesos ChiHuaHUA comían cacaHuETes, FramBuESas y Heno, ¡y HABLAN con hálito de ESPANGLISH!')
         );
-
 
         // TODO implement ignore links
         /*  $this->assertEquals(
