@@ -10,17 +10,17 @@ class XRulesTest extends TestCase
     /** @test */
     public function it_converts_xilófono_to_çilofono()
     {
-        $xRules = new XRules();
+        $xRules = new XRules(); //
         $this->assertEquals('çilófono', $xRules->apply('xilófono'));
         $this->assertEquals('Çilófono', $xRules->apply('Xilófono'));
     }
 
     /** @test */
-    public function it_converts_axila_to_aççila()
+    public function it_converts_axila_to_âççila()
     {
         $xRules = new XRules();
-        $this->assertEquals('aççila', $xRules->apply('axila'));
-        $this->assertEquals('Aççila', $xRules->apply('Axila'));
+        $this->assertEquals('âççila', $xRules->apply('axila'));
+        $this->assertEquals('Âççila', $xRules->apply('Axila'));
     }
 
     /** @test */
@@ -32,10 +32,10 @@ class XRulesTest extends TestCase
     }
 
     /** @test */
-    public function it_converts_sexy_to_çeççy()
+    public function it_converts_sexy_to_sêççy()
     {
         $xRules = new XRules();
-        $this->assertEquals('çeççy', $xRules->apply('sexy'));
-        $this->assertEquals('Çeççy', $xRules->apply('sexy'));
+        $this->assertEquals('sêççy', $xRules->apply('sexy'));
+        $this->assertEquals('Sêççy', $xRules->apply('Sexy'));
     }
 }
