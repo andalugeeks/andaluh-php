@@ -5,9 +5,7 @@ namespace Andaluh\Rules;
 class HRules extends BaseRule
 {
     const EXCEPTIONS = [
-        'haz' => 'âh',
-        'hez' => 'êh',
-        'hoz' => 'ôh',
+        'haz' => 'âh', 'hez' => 'êh', 'hoz' => 'ôh',
         'oh' => 'ôh',
         'yihad' => 'yihá',
         'h' => 'h'  # Keep an isolated h as-is
