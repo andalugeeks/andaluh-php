@@ -10,7 +10,7 @@ class VAFRules extends BaseRule
             [
                 // NV -> NB -> MB (i.e.: envidia -> embidia)
                 '/(z|s)(a|e|i|o|u|á|é|í|ó|ú|â|ê|î|ô|û)/i' => [self::class, 'replaceVAF'],
-                '/(c)(e|i|é|í|ê|î)/' => [self::class, 'replaceVAF'],
+                '/(c)(e|i|é|í|ê|î)/i' => [self::class, 'replaceVAF'],
             ],
             $text
         );
