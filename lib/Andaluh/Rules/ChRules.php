@@ -9,7 +9,7 @@ class ChRules extends BaseRule
     {
         # Replacement rules for /∫/ (voiceless postalveolar fricative)
         return preg_replace_callback(
-            '/(c)(h)/i',
+            '/(c)(h)/iu',
             function ($match) {
                 return self::isLowerCase($match[1])
                     ? 'x'

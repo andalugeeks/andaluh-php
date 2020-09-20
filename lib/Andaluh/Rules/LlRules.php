@@ -11,7 +11,7 @@ class LlRules extends BaseRule
     public static function apply(string $text): string
     {
         return preg_replace_callback(
-            '/\b(\w*?)(l)(l)(\w*?)\b/i',
+            '/\b(\w*?)(l)(l)(\w*?)\b/iu',
             function ($match) {
                 $word = $match[0];
                 $wordLower = self::toLowerCase($word);
@@ -23,7 +23,7 @@ class LlRules extends BaseRule
                     );
                 }
                 return preg_replace_callback(
-                    '/(l)(l)/i',
+                    '/(l)(l)/iu',
                     function ($match) {
                         return self::isLowerCase($match[1])
                             ? 'y'

@@ -130,6 +130,6 @@ abstract class BaseRule
 
     static function containsTildeVowel(string $text)
     {
-        return preg_match('/á|é|í|ó|ú/i', $text);
+        return preg_match('/á|é|í|ó|ú/iu', $text);
     }
 }

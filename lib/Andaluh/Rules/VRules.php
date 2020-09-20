@@ -12,7 +12,7 @@ class VRules extends BaseRule
     public static function apply(string $text): string
     {
         return preg_replace_callback(
-            '/\b(\w*?)(v)(\w*?)\b/i',
+            '/\b(\w*?)(v)(\w*?)\b/iu',
             function ($match) {
                 $word = $match[0];
                 $wordLower = self::toLowerCase($word);
@@ -27,7 +27,7 @@ class VRules extends BaseRule
                 return preg_replace_callback_array(
                     [
                         // NV -> NB -> MB (i.e.: envidia -> embidia)
-                        '/nv/i' => function ($match) {
+                        '/nv/iu' => function ($match) {
                             return self::keepCase($match[0], 'mb');
                         },
                         '/v/' => function ($match) {
