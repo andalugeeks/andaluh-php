@@ -34,7 +34,14 @@ class DigraphRules extends BaseRule
                 // cárstico => cárttico
 
                 '/(a|e|i|o|u|á|é|í|ó|ú)(l|r)s(t)/iu' => [self::class, 'replaceLstrstWithCase'],
+                // aerotransporte => aerotrâpporte 
+                // translado => trâl-lado 
+                // transcendente => trâççendente 
+                // postpalatal =>  pôppalatal
                 '/(tr|p)(a|o)(ns|st)(b|c|ç|Ç|d|f|g|h|j|k|l|m|n|p|q|s|t|v|w|x|y|z)/iu' => [self::class, 'replaceTranspostWithCase'],
+                // abstracto => âttrâtto 
+                // adscrito => âccrito 
+                // perspectiva => pêrppêttiba
                 '/(a|e|i|o|u|á|é|í|ó|ú)(b|d|n|r)(s)(b|c|ç|Ç|d|f|g|h|j|k|l|m|n|p|q|s|t|v|w|x|y|z)/iu' => [self::class, 'replaceBdnrSWithCase'],
                 '/(a|e|i|o|u|á|é|í|ó|ú)(d|j|r|s|t|x|z)(l)/iu' => [self::class, 'replaceLWithCase'],
                 '/(a|e|i|o|u|á|é|í|ó|ú)(' .  implode('|', self::DIGRAPHS) . ')/iu' => [self::class, 'replaceDigraphWithCase'],
@@ -62,7 +69,18 @@ class DigraphRules extends BaseRule
 
     private static function replaceTranspostWithCase(array $match): string
     {
-        return $match[0];
+        [
+            //$word,
+            ,
+            $vowelChar,
+            $consChar,
+            $sChar,
+            $digraphChar,
+        ] = $match;
+
+        return self::toLowerCase($consChar) === 'r' && self::toLowerCase($sChar) === 's'
+            ? "${vowelChar}{$consChar}${digraphChar}${digraphChar}"
+            : self::getVowelCircumflexs($vowelChar) . "{$digraphChar}{$digraphChar}";
     }
 
     private static function replaceBdnrSWithCase(array $match): string
