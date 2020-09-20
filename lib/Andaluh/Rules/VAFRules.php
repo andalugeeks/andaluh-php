@@ -8,8 +8,11 @@ class VAFRules extends BaseRule
     {
         return preg_replace_callback_array(
             [
-                // NV -> NB -> MB (i.e.: envidia -> embidia)
+                // servilleta => servilleta
+                // zarzamora => zarzamora
+                // gasoducto => gaçoducto
                 '/(z|s)(a|e|i|o|u|á|é|í|ó|ú|â|ê|î|ô|û)/i' => [self::class, 'replaceVAF'],
+                // cecina => çeçina
                 '/(c)(e|i|é|í|ê|î)/i' => [self::class, 'replaceVAF'],
             ],
             $text

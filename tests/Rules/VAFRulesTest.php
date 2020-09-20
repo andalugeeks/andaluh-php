@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 class VAFRulesTest extends TestCase
 {
     /** @test */
-    public function it_converts_servilleta_to_servilleta()
+    public function it_converts_servilleta_to_çervilleta()
     {
         $rules = new VAFRules();
         $this->assertEquals('çervilleta', $rules->apply('servilleta'));
@@ -16,7 +16,7 @@ class VAFRulesTest extends TestCase
     }
 
     /** @test */
-    public function it_converts_zarzamora_to_zarzamora()
+    public function it_converts_zarzamora_to_çarçamora()
     {
         $rules = new VAFRules();
         $this->assertEquals('çarçamora', $rules->apply('zarzamora'));
@@ -24,7 +24,7 @@ class VAFRulesTest extends TestCase
     }
 
     /** @test */
-    public function it_converts_gasoducto_to_gasoducto()
+    public function it_converts_gasoducto_to_gaçoducto()
     {
         $rules = new VAFRules();
         $this->assertEquals('gaçoducto', $rules->apply('gasoducto'));
