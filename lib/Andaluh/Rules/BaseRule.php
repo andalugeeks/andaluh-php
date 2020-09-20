@@ -2,9 +2,23 @@
 
 namespace Andaluh\Rules;
 
-
 abstract class BaseRule
 {
+    # Useful for calculate the circumflex equivalents.
+    const VOWELS = [
+        'notilde' => 'aeiouAEIOU',
+        'tilde' => 'áéíóúÁÉÍÓÚ',
+        'circumflex' => 'âêîôûÂÊÎÔÛ',
+    ];
+
+    # EPA character for Voiceless alveolar fricative /s/
+    # https://en.wikipedia.org/wiki/Voiceless_alveolar_fricative
+    const VAF = 'ç';
+
+    # EPA character for Voiceless velar fricative /x/
+    # https://en.wikipedia.org/wiki/Voiceless_velar_fricative
+    const VVF = 'h';
+
     static function keepCase(string $word, string $replacementWord): string
     {
         if (self::isLowerCase($word)) {
@@ -48,5 +62,69 @@ abstract class BaseRule
     static function isTitleCase(string $word): bool
     {
         return self::toTitleCase($word) === $word;
+    }
+
+    /**
+     * Get circumflexs vowel equivalent 
+     *
+     * @param string $vowel
+     * @return string circumlfexed vowel
+     */
+    static function getVowelCircumflexs(string $vowel): string
+    {
+        if (mb_strlen($vowel) > 1) {
+            throw new \Exception('getVowelCircumflexs can only transform 1 vowel');
+        }
+
+        [
+            'notilde' => $notildeVowels,
+            'tilde' => $tildeVowels,
+            'circumflex' => $circumflexVowels
+        ] = self::VOWELS;
+
+        // If circumflex or tilde return vowel
+        if (mb_strpos($circumflexVowels, $vowel) !== false || mb_strpos($tildeVowels, $vowel) !== false) {
+            return $vowel;
+        }
+
+        if (($notildeIndex = mb_strpos($notildeVowels, $vowel)) === false) {
+            throw new \Exception('Not a vowel');
+        }
+
+        return mb_substr(
+            $circumflexVowels,
+            $notildeIndex,
+            1
+        );
+    }
+
+    /**
+     * Get vowel tilde equivalent
+     *
+     * @param string $vowel
+     * @return string tilde vowel
+     */
+    static function getVowelTilde(string $vowel): string
+    {
+        if (mb_strlen($vowel) > 1) {
+            throw new \Exception('getVowelTilde can only transform 1 vowel');
+        }
+
+        [
+            'notilde' => $notildeVowels,
+            'tilde' => $tildeVowels,
+            'circumflex' => $circumflexVowels
+        ] = self::VOWELS;
+
+        // If circumflex or tilde return vowel
+        if (mb_strpos($circumflexVowels, $vowel) !== false || mb_strpos($tildeVowels, $vowel) !== false) {
+            return $vowel;
+        }
+
+        if (($notilde_index = mb_strpos($notildeVowels, $vowel)) === false) {
+            throw new \Exception('Not a vowel');
+        }
+
+        return mb_substr($tildeVowels, $notilde_index, 1);
     }
 }
