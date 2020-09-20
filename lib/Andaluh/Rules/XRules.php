@@ -14,7 +14,6 @@ class XRules extends BaseRule
         } else if ($text[0] == "x") {
             $text = $vaf . mb_substr($text, 1);
         }
-
         return preg_replace_callback_array(
             [
                 # If the /ks/ sound is between vowels
@@ -30,6 +29,12 @@ class XRules extends BaseRule
                         return "{$prev_char}{$upperVaf}{$upperVaf}{$next_char}";
                     }
                     return $prev_char . str_repeat($vaf, 2) . $next_char;
+                },
+                // Every word starting with /ks/
+                // un çilófono Xungo. => un çilófono Chungo
+                '/\b(x)/iu' => function ($match) use ($vaf) {
+                    $xChar = $match[1];
+                    return self::keepCase($xChar, $vaf);
                 },
             ],
             $text
