@@ -222,15 +222,6 @@ return [
         "zy"
     ],
 
-    'H_RULES_EXCEPT' => [
-        'haz' => 'âh',
-        'hez' => 'êh',
-        'hoz' => 'ôh',
-        'oh' => 'ôh',
-        'yihad' => 'yihá',
-        'h' => 'h'  # Keep an isolated h as-is
-    ],
-
     'GJ_RULES_EXCEPT' => [
         'gin' => 'yin',
         'jazz' => 'yâh',

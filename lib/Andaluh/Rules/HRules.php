@@ -4,14 +4,31 @@ namespace Andaluh\Rules;
 
 class HRules extends BaseRule
 {
+    const EXCEPTIONS = [
+        'haz' => 'âh',
+        'hez' => 'êh',
+        'hoz' => 'ôh',
+        'oh' => 'ôh',
+        'yihad' => 'yihá',
+        'h' => 'h'  # Keep an isolated h as-is
+    ];
+
     public static function apply(string $text): string
     {
         return preg_replace_callback_array(
             [
-                '/(?<!c)(h)(ua)/' => function ($matches) {
-                    return self::isLowerCase($matches[1])
-                        ? "g{$matches[2]}"
-                        : "g{$matches[2]}";
+                # chihuahua => chiguagua
+                '/(?<!c)(h)(ua)/i' => function ($match) {
+                    return self::isLowerCase($match[1])
+                        ? "g{$match[2]}"
+                        : "g{$match[2]}";
+                },
+                # cacahuete => cacagüete ,at the end will be cacagûete
+                '/(?<!c)(h)(u)(e)/i' => function ($match) {
+                    $transformed = self::keepCase($match[2], 'ü') . $match[3];
+                    return self::isLowerCase($match[1])
+                        ? "g{$transformed}"
+                        : "g{$transformed}";
                 },
             ],
             $text
