@@ -4,61 +4,6 @@ namespace Andaluh\Rules;
 
 class WordEndingRules extends BaseRule
 {
-    const EXCEPTIONS = [
-        # Exceptions to digraph rules with nm
-        'biêmmandao' => 'bienmandao',
-        'biêmmeçabe' => 'bienmeçabe',
-        'buêmmoço' => 'buenmoço',
-        'çiêmmiléçima' => 'çienmiléçima',
-        'çiêmmiléçimo' => 'çienmiléçimo',
-        'çiêmmilímetro' => 'çienmilímetro',
-        'çiêmmiyonéçima' => 'çienmiyonéçima',
-        'çiêmmiyonéçimo' => 'çienmiyonéçimo',
-        'çiêmmirmiyonéçima' => 'çienmirmiyonéçima',
-        'çiêmmirmiyonéçimo' => 'çienmirmiyonéçimo',
-        # Exceptions to l rules
-        'marrotadôh' => 'mârrotadôh',
-        'marrotâh' => 'mârrotâh',
-        'mirrayâ' => 'mîrrayâ',
-        # Exceptions to psico pseudo rules
-        'herôççiquiatría' => 'heroçiquiatría',
-        'herôççiquiátrico' => 'heroçiquiátrico',
-        'farmacôççiquiatría' => 'farmacoçiquiatría',
-        'metempçícoçî' => 'metemçícoçî',
-        'necróçico' => 'necróççico',
-        'pampçiquîmmo' => 'pamçiquîmmo',
-        # Other exceptions
-        'antîççerôttármico' => 'antiçerôttármico',
-        'eclampçia' => 'eclampçia',
-        'pôttoperatorio' => 'pôççoperatorio',
-        'çáccrito' => 'çánccrito',
-        'manbîh' => 'mambîh',
-        'cômmelináçeo' => 'commelináçeo',
-        'dîmmneçia' => 'dînneçia',
-        'todo' => 'tó',
-        'todô' => 'tôh',
-        'toda' => 'toa',
-        'todâ' => 'toâ',
-        # Other exceptions monosyllables
-        'as' => 'âh',
-        'clown' => 'claun',
-        'crack' => 'crâh',
-        'down' => 'daun',
-        'es' => 'êh',
-        'ex' => 'êh',
-        'ir' => 'îh',
-        'miss' => 'mîh',
-        'muy' => 'mu',
-        'ôff' => 'off',
-        'os' => 'ô',
-        'para' => 'pa',
-        'ring' => 'rin',
-        'rock' => 'rôh',
-        'spray' => 'êppray',
-        'sprint' => 'êpprín',
-        'wau' => 'guau'
-    ];
-
     const WORDEND_D_RULES_EXCEPT = [
         'çed' => 'çêh'
     ];
