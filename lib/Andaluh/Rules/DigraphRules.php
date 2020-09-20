@@ -114,7 +114,7 @@ class DigraphRules extends BaseRule
     private static function replaceDigraphWithCase(array $match): string
     {
         $vowelChar = $match[1];
-        $digraphChar = $match[2][1];
+        $digraphChar = mb_substr($match[2], 1, 1);
 
         return self::getVowelCircumflexs($vowelChar) . "{$digraphChar}{$digraphChar}";
     }

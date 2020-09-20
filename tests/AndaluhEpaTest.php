@@ -14,12 +14,12 @@ class AndaluhEpaTest extends TestCase
         $andaluh = new AndaluhEpa();
 
         //TODO pass
-        /* $this->assertEquals(
+        $this->assertEquals(
             'Tó Çenomorfo diçe: [abêh], que el Éççito y el éttaçî âffîççian, çi no erê un çilófono Xungo.',
             $andaluh->transliterate('Todo Xenomorfo dice: [haber], que el Éxito y el éxtasis asfixian, si no eres un xilófono Chungo.')
-        ); */
+        );
 
-        /*    $this->assertEquals(
+        $this->assertEquals(
             'Yeba un Giharrito el AGuelo, ¡Qué Gueno! ¡pa la BERGUENÇA!',
             $andaluh->transliterate('Lleva un Guijarrito el ABuelo, ¡Qué Bueno! ¡para la VERGÜENZA!')
         );
@@ -37,17 +37,14 @@ class AndaluhEpaTest extends TestCase
         $this->assertEquals(
             'En la Çaragoça y er Hapón açêççuâh çe Çabía ÇÉriamente çIRBÂH con er CÔççî',
             $andaluh->transliterate('En la Zaragoza y el Japón asexual se Sabía SÉriamente sILBAR con el COxis')
-        ); */
+        );
 
-        // TODO pass
         $this->assertEquals(
             'Trâpportandonô a la cônnotaçión perppicâh del âttrâtto çorttiçio de Alâkka, el aîl-lante pláttico âççorbente âffîççió al ânnéçico çeudoêccritôh granadino de côttituçionê, pa CôMMemorâh broncâ âccritâ',
             $andaluh->transliterate('Transportandonos a la connotación perspicaz del abstracto solsticio de Alaska, el aislante plástico adsorvente asfixió al aMnésico pseudoescritor granadino de constituciones, para ConMemorar broncas adscritas')
         );
 
-
-
-        /* $this->assertEquals(
+        $this->assertEquals(
             'En la pômmodênnidá, er trâccurço de lô trâpportê y trâl-láô en pôttoperatoriô trâççienden a la pôttre unâ pôttiyâ pôppalatalê apôttiyâh çe trâffieren',
             $andaluh->transliterate('En la postmodernidad, el transcurso de los transportes y translados en postoperatorios transcienden a la postre unas postillas postpalatales apostilladas se transfieren')
         );
@@ -66,7 +63,7 @@ class AndaluhEpaTest extends TestCase
             'Lô ÇAGueçô XiGuaGUA comían cacaGuETê, FramBuEÇâ y Eno, ¡y ABLAN con álito de ÊPPANGLÎ!',
             $andaluh->transliterate('Los SABuesos ChiHuaHUA comían cacaHuETes, FramBuESas y Heno, ¡y HABLAN con hálito de ESPANGLISH!')
         );
-        */
+
 
         // TODO implement ignore links
         /*  $this->assertEquals(

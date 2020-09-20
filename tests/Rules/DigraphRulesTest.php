@@ -135,4 +135,12 @@ class DigraphRulesTest extends TestCase
         $this->assertEquals('pôttoperatorio', $rules->apply('postoperatorio'));
         $this->assertEquals('PÔTTOPERATORIO', $rules->apply('POSTOPERATORIO'));
     }
+
+    /** @test */
+    public function it_converts_adçorbente_to_âççorbente()
+    {
+        $rules = new DigraphRules();
+        $this->assertEquals('âççorbente', $rules->apply('adçorbente'));
+        $this->assertEquals('ÂÇÇORBENTE', $rules->apply('ADÇORBENTE'));
+    }
 }
