@@ -5,7 +5,7 @@ namespace Tests;
 use Andaluh\Rules\ExceptionsRules;
 use PHPUnit\Framework\TestCase;
 
-class XRulesTest extends TestCase
+class ExceptionsRulesTest extends TestCase
 {
     // TODO TEST
 }
