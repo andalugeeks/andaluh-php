@@ -160,7 +160,7 @@ class WordEndingRules extends BaseRule
         return $prefix . self::keepCase($suffix_vowel, 'ê');
     }
 
-    private static function replaceSEndWithCase(array $match): string
+    private static function replaceDEndWithCase(array $match): string
     {
         [$word, $prefix, $suffix_vowel, $suffix_const] = $match;
         $wordLower = self::toLowerCase($word);
@@ -171,7 +171,7 @@ class WordEndingRules extends BaseRule
             );
         }
 
-        if (!self::containsTildeVowel($prefix)) {
+        if (self::containsTildeVowel($prefix)) {
             $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
             return "{$prefix}{$unstressed}";
         }
@@ -181,6 +181,25 @@ class WordEndingRules extends BaseRule
             return "{$prefix}{$stressed}";
         }
 
+        return "{$prefix}{$stressed}" . self::keepCase($suffix_const, 'h');
+    }
+    private static function replaceSEndWithCase(array $match): string
+    {
+        [$word, $prefix, $suffix_vowel, $suffix_const] = $match;
+        $wordLower = self::toLowerCase($word);
+        if (array_key_exists($wordLower, self::WORDEND_S_RULES_EXCEPT)) {
+            return self::keepCase(
+                $wordLower,
+                self::WORDEND_S_RULES_EXCEPT[$wordLower]
+            );
+        }
+
+        if (!self::containsTildeVowel($prefix)) {
+            $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
+            return "{$prefix}{$unstressed}";
+        }
+
+        $stressed = self::UNSTRESSED_RULES[$suffix_vowel];
         return "{$prefix}{$stressed}" . self::keepCase($suffix_const, 'h');
     }
 
@@ -195,11 +214,11 @@ class WordEndingRules extends BaseRule
             );
         }
 
+        $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
         if (self::containsTildeVowel($prefix)) {
-            $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
             return "{$prefix}{$unstressed}";
         }
 
-        return $prefix . self::UNSTRESSED_RULES[$suffix_vowel] . self::keepCase($suffix_const, 'h');
+        return "{$prefix}{$unstressed}" . self::keepCase($suffix_const, 'h');
     }
 }

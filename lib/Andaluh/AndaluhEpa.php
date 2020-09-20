@@ -2,14 +2,36 @@
 
 namespace Andaluh;
 
+use Andaluh\Rules\ChRules;
+use Andaluh\Rules\DigraphRules;
+use Andaluh\Rules\ExceptionsRules;
+use Andaluh\Rules\GJRules;
 use Andaluh\Rules\HRules;
+use Andaluh\Rules\LlRules;
+use Andaluh\Rules\LRules;
+use Andaluh\Rules\PsicoPseudoRules;
+use Andaluh\Rules\VAFRules;
+use Andaluh\Rules\VRules;
+use Andaluh\Rules\WordEndingRules;
+use Andaluh\Rules\WordInteractionRules;
 use Andaluh\Rules\XRules;
 
 class AndaluhEpa
 {
-    public $rules = [
-        'h' => HRules::class,
-        'x' => XRules::class,
+    private $rules = [
+        HRules::class,
+        XRules::class,
+        ChRules::class,
+        GJRules::class,
+        VRules::class,
+        LlRules::class,
+        LRules::class,
+        PsicoPseudoRules::class,
+        VAFRules::class,
+        WordEndingRules::class,
+        DigraphRules::class,
+        ExceptionsRules::class,
+        WordInteractionRules::class
     ];
 
     /**
@@ -26,9 +48,21 @@ class AndaluhEpa
         string $text,
         string $vaf = '',
         string $vvf = '',
-        bool $escape_links = false,
-        bool $debug = false
+        bool $escape_links = false, //TODO
+        bool $debug = false //TODO
     ): string {
-        return $text;
+        return array_reduce(
+            $this->rules,
+            function ($text, $ruleClass) use ($vaf, $vvf) {
+                if ($ruleClass === XRules::class || $ruleClass === VAFRules::class) {
+                    return $ruleClass::apply($text, $vaf);
+                }
+                if ($ruleClass === GjRules::class) {
+                    return $ruleClass::apply($text, $vvf);
+                }
+                return $ruleClass::apply($text);
+            },
+            $text
+        );
     }
 }
