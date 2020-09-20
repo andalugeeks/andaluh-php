@@ -76,4 +76,41 @@ class AndaluhEpaTest extends TestCase
 
         # Lemario test
     }
+
+    /** @test */
+    public function it_pass_lemario_test()
+    {
+        $testCSVPath = __DIR__ . '/lemario_cas_and.csv';
+        $handle = fopen($testCSVPath, 'r');
+        ini_set('auto_detect_line_endings', TRUE);
+
+        $transcriptions = [];
+        $transcriptionErrors = [];
+        $stats = [
+            "total" => 0,
+            "ok" => 0,
+            "fail" => 0
+        ];
+
+        $andaluh = new AndaluhEpa();
+        $testCase = fgetcsv($handle);
+        while (($testCase = fgetcsv($handle)) !== FALSE) {
+            $caste = $testCase[0];
+            $andal = $testCase[1];
+            $trans = $andaluh->transliterate($caste);
+
+            if ($andal !== $trans) {
+                $transcriptionErrors[] = compact(['caste', 'andal', 'trans']);
+                $stats["fail"] += 1;
+            } else {
+                $stats["ok"] += 1;
+            }
+
+            $transcriptions[] = compact(['caste', 'andal', 'trans']);
+            $stats["total"] += 1;
+        }
+
+        var_dump($stats);
+        $this->assertEquals(0, $stats['fail']);
+    }
 }
