@@ -206,10 +206,6 @@ return [
         "zy"
     ],
 
-    'LL_RULES_EXCEPT' => [
-        'grill' => 'grîh'
-    ],
-
     'WORDEND_D_RULES_EXCEPT' => [
         'çed' => 'çêh'
     ],
