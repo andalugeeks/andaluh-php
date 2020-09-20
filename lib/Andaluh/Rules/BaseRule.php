@@ -127,4 +127,9 @@ abstract class BaseRule
 
         return mb_substr($tildeVowels, $notilde_index, 1);
     }
+
+    static function containsTildeVowel(string $text)
+    {
+        return preg_match('/á|é|í|ó|ú/i', $text);
+    }
 }
