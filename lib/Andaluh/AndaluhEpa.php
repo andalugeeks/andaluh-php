@@ -2,6 +2,7 @@
 
 namespace Andaluh;
 
+use Andaluh\Rules\BaseRule;
 use Andaluh\Rules\ChRules;
 use Andaluh\Rules\DigraphRules;
 use Andaluh\Rules\ExceptionsRules;
@@ -46,15 +47,15 @@ class AndaluhEpa
      */
     public function transliterate(
         string $text,
-        string $vaf = '',
-        string $vvf = '',
+        string $vaf = BaseRule::VAF,
+        string $vvf = BaseRule::VVF,
         bool $escape_links = false, //TODO
         bool $debug = false //TODO
     ): string {
         return array_reduce(
             $this->rules,
             function ($text, $ruleClass) use ($vaf, $vvf) {
-                if ($ruleClass === XRules::class || $ruleClass === VAFRules::class) {
+                if ($ruleClass === XRules::class || $ruleClass == VAFRules::class) {
                     return $ruleClass::apply($text, $vaf);
                 }
                 if ($ruleClass === GjRules::class) {

@@ -11,11 +11,11 @@ class VAFRules extends BaseRule
                 // servilleta => servilleta
                 // zarzamora => zarzamora
                 // gasoducto => gaçoducto
-                '/(z|s)(a|e|i|o|u|á|é|í|ó|ú|â|ê|î|ô|û)/i' => function ($match) use ($vaf) {
+                '/(z|s)(a|e|i|o|u|á|é|í|ó|ú|â|ê|î|ô|û)/iu' => function ($match) use ($vaf) {
                     return self::replaceVAF($match, $vaf);
                 },
                 // cecina => çeçina
-                '/(c)(e|i|é|í|ê|î)/i' => function ($match) use ($vaf) {
+                '/(c)(e|i|é|í|ê|î)/iu' => function ($match) use ($vaf) {
                     return self::replaceVAF($match, $vaf);
                 },
             ],

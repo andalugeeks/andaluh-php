@@ -38,4 +38,11 @@ class VAFRulesTest extends TestCase
         $this->assertEquals('çeçina', $rules->apply('cecina'));
         $this->assertEquals('ÇEÇINA', $rules->apply('CECINA'));
     }
+
+    public function it_converts_dice_to_diçe()
+    {
+        $rules = new VAFRules();
+        $this->assertEquals('diçe:', $rules->apply('dice'));
+        $this->assertEquals('DIÇE:', $rules->apply('DICE'));
+    }
 }
