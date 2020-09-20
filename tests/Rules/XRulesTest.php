@@ -13,6 +13,7 @@ class XRulesTest extends TestCase
         $xRules = new XRules(); //
         $this->assertEquals('çilófono', $xRules->apply('xilófono'));
         $this->assertEquals('Çilófono', $xRules->apply('Xilófono'));
+        $this->assertEquals('un çilófono Xungo.', $xRules->apply('un xilófono Xungo'));
     }
 
     /** @test */
