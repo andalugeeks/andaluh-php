@@ -82,7 +82,6 @@ class DigraphRules extends BaseRule
             $consChar,
         ] = $match;
 
-        var_dump($match);
         return self::toLowerCase($consChar) === 'l'
             ? $initChar . self::getVowelCircumflexs($vowelChar) . "{$consChar}-{$consChar}"
             : $initChar . self::getVowelCircumflexs($vowelChar) . "{$consChar}{$consChar}";
