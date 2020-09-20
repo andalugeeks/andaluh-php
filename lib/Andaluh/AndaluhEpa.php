@@ -52,6 +52,7 @@ class AndaluhEpa
         bool $escape_links = false, //TODO
         bool $debug = false //TODO
     ): string {
+
         return array_reduce(
             $this->rules,
             function ($text, $ruleClass) use ($vaf, $vvf) {

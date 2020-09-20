@@ -40,11 +40,11 @@ class AndaluhEpaTest extends TestCase
         ); */
 
         // TODO pass
-        /*  $this->assertEquals(
+        $this->assertEquals(
             'Trâpportandonô a la cônnotaçión perppicâh del âttrâtto çorttiçio de Alâkka, el aîl-lante pláttico âççorbente âffîççió al ânnéçico çeudoêccritôh granadino de côttituçionê, pa CôMMemorâh broncâ âccritâ',
             $andaluh->transliterate('Transportandonos a la connotación perspicaz del abstracto solsticio de Alaska, el aislante plástico adsorvente asfixió al aMnésico pseudoescritor granadino de constituciones, para ConMemorar broncas adscritas')
         );
-        */
+
 
 
         /* $this->assertEquals(
