@@ -36,14 +36,19 @@ class DigraphRules extends BaseRule
                 '/(a|e|i|o|u|á|é|í|ó|ú)(l|r)s(t)/iu' => [self::class, 'replaceLstrstWithCase'],
                 // aerotransporte => aerotrâpporte 
                 // translado => trâl-lado 
-                // transcendente => trâççendente 
+                // transcendente => trâccendente 
                 // postpalatal =>  pôppalatal
-                '/(tr|p)(a|o)(ns|st)(b|c|ç|Ç|d|f|g|h|j|k|l|m|n|p|q|s|t|v|w|x|y|z)/iu' => [self::class, 'replaceTranspostWithCase'],
+                '/(tr|p)(a|o)(?:ns|st)(b|c|ç|d|f|g|h|j|k|l|m|n|p|q|s|t|v|w|x|y|z)/iu' => [self::class, 'replaceTranspostWithCase'],
                 // abstracto => âttrâtto 
                 // adscrito => âccrito 
-                // perspectiva => pêrppêttiba
+                // perspectiva => perppêttiva
                 '/(a|e|i|o|u|á|é|í|ó|ú)(b|d|n|r)(s)(b|c|ç|Ç|d|f|g|h|j|k|l|m|n|p|q|s|t|v|w|x|y|z)/iu' => [self::class, 'replaceBdnrSWithCase'],
+                // atlántico => âl-lántico 
+                // orla => ôl-la 
+                // adlátere => âl-látere 
+                // tesla => têl-la 
                 '/(a|e|i|o|u|á|é|í|ó|ú)(d|j|r|s|t|x|z)(l)/iu' => [self::class, 'replaceLWithCase'],
+                // General digraph rules (postperatorio => pôttoperatorio)
                 '/(a|e|i|o|u|á|é|í|ó|ú)(' .  implode('|', self::DIGRAPHS) . ')/iu' => [self::class, 'replaceDigraphWithCase'],
             ],
             $text
@@ -72,6 +77,22 @@ class DigraphRules extends BaseRule
         [
             //$word,
             ,
+            $initChar,
+            $vowelChar,
+            $consChar,
+        ] = $match;
+
+        var_dump($match);
+        return self::toLowerCase($consChar) === 'l'
+            ? $initChar . self::getVowelCircumflexs($vowelChar) . "{$consChar}-{$consChar}"
+            : $initChar . self::getVowelCircumflexs($vowelChar) . "{$consChar}{$consChar}";
+    }
+
+    private static function replaceBdnrSWithCase(array $match): string
+    {
+        [
+            //$word,
+            ,
             $vowelChar,
             $consChar,
             $sChar,
@@ -83,18 +104,19 @@ class DigraphRules extends BaseRule
             : self::getVowelCircumflexs($vowelChar) . "{$digraphChar}{$digraphChar}";
     }
 
-    private static function replaceBdnrSWithCase(array $match): string
-    {
-        return $match[0];
-    }
-
     private static function replaceLWithCase(array $match): string
     {
-        return $match[0];
+        $vowelChar = $match[1];
+        $digraphChar = $match[3];
+
+        return self::getVowelCircumflexs($vowelChar) . "{$digraphChar}-{$digraphChar}";
     }
 
     private static function replaceDigraphWithCase(array $match): string
     {
-        return $match[0];
+        $vowelChar = $match[1];
+        $digraphChar = $match[2][1];
+
+        return self::getVowelCircumflexs($vowelChar) . "{$digraphChar}{$digraphChar}";
     }
 }
