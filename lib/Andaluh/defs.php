@@ -2,22 +2,6 @@
 
 
 return [
-    # Useful for calculate the circumflex equivalents.
-    'vowels' => [
-        'notilde' => 'aeiouAEIOU',
-        'tilde' => 'áéíóúÁÉÍÓÚ',
-        'circumflex' => 'âêîôûÂÊÎÔÛ',
-    ],
-
-    # EPA character for Voiceless alveolar fricative /s/
-    # https://en.wikipedia.org/wiki/Voiceless_alveolar_fricative
-    'VAF' => 'ç',
-
-    # EPA character for Voiceless velar fricative /x/
-    # https://en.wikipedia.org/wiki/Voiceless_velar_fricative
-    'VVF' => 'h',
-
-
     # Digraphs producers. (vowel)(const)(const) that triggers the general
     # digraph rule
     'DIGRAPHS' => [
