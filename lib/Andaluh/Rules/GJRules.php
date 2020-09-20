@@ -20,6 +20,11 @@ class GJRules extends BaseRule
                 => function ($match) use ($vvf) {
                     return self::replaceWithHCase($match, $vvf);
                 },
+                // Gijarrito => hiharrito
+                '/\b(\w*?)(j)(a|o|u|á|ó|ú)(\w*?)\b/iu'
+                => function ($match) use ($vvf) {
+                    return self::replaceWithHCase($match, $vvf);
+                },
                 // GUE,GUI replacement
                 '/(g)u(e|i|é|í)/iu' => function ($match) {
                     return "{$match[1]}{$match[2]}";

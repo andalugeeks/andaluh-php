@@ -64,4 +64,12 @@ class GJRulesTest extends TestCase
         $this->assertEquals('sagues', $gjRules->apply('sabues'));
         $this->assertEquals('SAGUES', $gjRules->apply('SABUES'));
     }
+
+    /** @test */
+    public function it_replaces_gijarrito_giharrito()
+    {
+        $gjRules = new GjRules();
+        $this->assertEquals('un hiharrito', $gjRules->apply('un gijarrito'));
+        $this->assertEquals('UN HIHARRITO', $gjRules->apply('UN GIJARRITO'));
+    }
 }

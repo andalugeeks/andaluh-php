@@ -14,6 +14,7 @@ class XRules extends BaseRule
         } else if ($text[0] == "x") {
             $text = $vaf . mb_substr($text, 1);
         }
+
         return preg_replace_callback_array(
             [
                 # If the /ks/ sound is between vowels
