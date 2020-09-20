@@ -145,7 +145,6 @@ class WordEndingRules extends BaseRule
 
     public static function apply(string $text): string
     {
-        # Replacement rules for /∫/ (voiceless postalveolar fricative)
         return preg_replace_callback_array(
             [
                 '/\b(\w*?)(a|i|í|Í)(d)(o|a)(?P<s>s?)\b/iu' => [self::class, 'replaceIntervowelDEndWithCase'],
@@ -203,6 +202,7 @@ class WordEndingRules extends BaseRule
     {
         [
             //$word, 
+            ,
             $prefix,
             $suffix_vowel,
             $suffix_const
