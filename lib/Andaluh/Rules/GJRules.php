@@ -10,13 +10,16 @@ class GJRules extends BaseRule
         'jet' => 'yêh'
     ];
 
-    public static function apply(string $text): string
+    public static function apply(string $text, string $vvf = self::VVF): string
     {
         # Replacement rules for /∫/ (voiceless postalveolar fricative)
         return preg_replace_callback_array(
             [
                 //TODO missing test cases
-                '/\b(\w*?)(g|j)(e|i|é|í)(\w*?)\b/iu' => [self::class, 'replaceWithHCase'],
+                '/\b(\w*?)(g|j)(e|i|é|í)(\w*?)\b/iu'
+                => function ($match) use ($vvf) {
+                    return self::replaceWithHCase($match, $vvf);
+                },
                 // GUE,GUI replacement
                 '/(g)u(e|i|é|í)/iu' => function ($match) {
                     return "{$match[1]}{$match[2]}";
@@ -43,7 +46,7 @@ class GJRules extends BaseRule
         );
     }
 
-    private static function replaceWithHCase(array $match): string
+    private static function replaceWithHCase(array $match, string $vvf = self::VVF): string
     {
         $word = $match[0];
         $wordLower = self::toLowerCase($word);
@@ -56,15 +59,15 @@ class GJRules extends BaseRule
 
         return preg_replace_callback_array(
             [
-                '/(g|j)(e|i|é|í)/iu' => function ($match) {
+                '/(g|j)(e|i|é|í)/iu' => function ($match) use ($vvf) {
                     return self::isLowerCase($match[1])
-                        ? self::VVF . $match[2]
-                        : self::toUpperCase(self::VVF) . $match[2];
+                        ? "{$vvf}{$match[2]}"
+                        : self::toUpperCase($vvf) . $match[2];
                 },
-                '/(j)(a|o|u|á|ó|ú)/iu' => function ($match) {
+                '/(j)(a|o|u|á|ó|ú)/iu' => function ($match) use ($vvf) {
                     return self::isLowerCase($match[1])
-                        ? self::VVF . $match[2]
-                        : self::toUpperCase(self::VVF) . $match[2];
+                        ? "{$vvf}{$match[2]}"
+                        : self::toUpperCase($vvf) . $match[2];
                 },
             ],
             $word
