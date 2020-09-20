@@ -4,12 +4,19 @@ namespace Andaluh\Rules;
 
 class GJRules extends BaseRule
 {
+    const EXCEPTIONS = [
+        'gin' => 'yin',
+        'jazz' => 'yâh',
+        'jet' => 'yêh'
+    ];
 
     public static function apply(string $text): string
     {
         # Replacement rules for /∫/ (voiceless postalveolar fricative)
         return preg_replace_callback_array(
             [
+                //TODO missing test cases
+                '/\b(\w*?)(g|j)(e|i|é|í)(\w*?)\b/iu' => [self::class, 'replaceWithHCase'],
                 // GUE,GUI replacement
                 '/(g)u(e|i|é|í)/iu' => function ($match) {
                     return "{$match[1]}{$match[2]}";
@@ -19,8 +26,48 @@ class GJRules extends BaseRule
                     $middle_u = self::keepCase($match[2], 'u');
                     return "{$match[1]}{$middle_u}{$match[3]}";
                 },
+                // buen  => guen
+                '/(b)(uen)/iu' => function ($match) {
+                    return self::isLowerCase($match[1])
+                        ? "g{$match[2]}"
+                        : "G{$match[2]}";
+                },
+                // abuel => aguel 
+                // sabues => sagues
+                '/(?P<s>s?)(?P<a>a?)(?<!m)(?P<b>b)(?P<ue>ue)(?P<const>l|s)/iu' => function ($match) {
+                    $replacedB = self::keepCase($match['b'], 'g');
+                    return "{$match['s']}{$match['a']}{$replacedB}{$match['ue']}{$match['const']}";
+                },
             ],
             $text
+        );
+    }
+
+    private static function replaceWithHCase(array $match): string
+    {
+        $word = $match[0];
+        $wordLower = self::toLowerCase($word);
+        if (array_key_exists($wordLower, self::EXCEPTIONS)) {
+            return self::keepCase(
+                $wordLower,
+                self::EXCEPTIONS[$wordLower]
+            );
+        }
+
+        return preg_replace_callback_array(
+            [
+                '/(g|j)(e|i|é|í)/iu' => function ($match) {
+                    return self::isLowerCase($match[1])
+                        ? self::VVF . $match[2]
+                        : self::toUpperCase(self::VVF) . $match[2];
+                },
+                '/(j)(a|o|u|á|ó|ú)/iu' => function ($match) {
+                    return self::isLowerCase($match[1])
+                        ? self::VVF . $match[2]
+                        : self::toUpperCase(self::VVF) . $match[2];
+                },
+            ],
+            $word
         );
     }
 }

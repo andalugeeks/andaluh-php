@@ -10,7 +10,7 @@ class GJRulesTest extends TestCase
     /** @test */
     public function it_replaces_gue_gui()
     {
-        $gjRules = new GjRules(); //
+        $gjRules = new GjRules();
         $this->assertEquals('ge', $gjRules->apply('gue'));
         $this->assertEquals('GE', $gjRules->apply('GUE'));
 
@@ -27,7 +27,7 @@ class GJRulesTest extends TestCase
     /** @test */
     public function it_replaces_güe_güi()
     {
-        $gjRules = new GjRules(); //
+        $gjRules = new GjRules();
         $this->assertEquals('gue', $gjRules->apply('güe'));
         $this->assertEquals('GUE', $gjRules->apply('GÜE'));
 
@@ -39,5 +39,29 @@ class GJRulesTest extends TestCase
 
         $this->assertEquals('guí', $gjRules->apply('güí'));
         $this->assertEquals('GuÍ', $gjRules->apply('GüÍ'));
+    }
+
+    /** @test */
+    public function it_replaces_buen_guen()
+    {
+        $gjRules = new GjRules();
+        $this->assertEquals('guen', $gjRules->apply('buen'));
+        $this->assertEquals('GUEN', $gjRules->apply('BUEN'));
+    }
+
+    /** @test */
+    public function it_replaces_abuel_aguel()
+    {
+        $gjRules = new GjRules();
+        $this->assertEquals('aguel', $gjRules->apply('abuel'));
+        $this->assertEquals('AGUEL', $gjRules->apply('ABUEL'));
+    }
+
+    /** @test */
+    public function it_replaces_sabues_sagues()
+    {
+        $gjRules = new GjRules();
+        $this->assertEquals('sagues', $gjRules->apply('sabues'));
+        $this->assertEquals('SAGUES', $gjRules->apply('SABUES'));
     }
 }

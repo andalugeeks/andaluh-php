@@ -206,12 +206,6 @@ return [
         "zy"
     ],
 
-    'GJ_RULES_EXCEPT' => [
-        'gin' => 'yin',
-        'jazz' => 'yâh',
-        'jet' => 'yêh'
-    ],
-
     'V_RULES_EXCEPT' => [
         'vis' => 'bî',
         'ves' => 'bêh'
