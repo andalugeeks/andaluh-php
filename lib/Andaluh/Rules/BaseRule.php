@@ -5,7 +5,7 @@ namespace Andaluh\Rules;
 
 abstract class BaseRule
 {
-    public function keepCase(string $word, string $replacementWord): string
+    static function keepCase(string $word, string $replacementWord): string
     {
         if (self::isLowerCase($word)) {
             return mb_convert_case($replacementWord, MB_CASE_LOWER, "UTF-8");

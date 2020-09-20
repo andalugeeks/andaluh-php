@@ -3,7 +3,6 @@
 namespace Tests;
 
 use Andaluh\Rules\BaseRule;
-use IntlChar;
 use PHPUnit\Framework\TestCase;
 
 class BaseRuleTest extends TestCase
@@ -15,7 +14,7 @@ class BaseRuleTest extends TestCase
         $rule = $this->getMockForAbstractClass(BaseRule::class);
         $this->assertEquals(
             "replace converted to lower",
-            $rule->keepCase("this is lower case", "REPLACE CONVERTED TO LOWER")
+            $rule::keepCase("this is lower case", "REPLACE CONVERTED TO LOWER")
         );
     }
 
@@ -25,7 +24,7 @@ class BaseRuleTest extends TestCase
         $rule = $this->getMockForAbstractClass(BaseRule::class);
         $this->assertEquals(
             "REPLACE CONVERTED TO UPPER",
-            $rule->keepCase("THIS IS UPPER CASE", "replace converted to upper")
+            $rule::keepCase("THIS IS UPPER CASE", "replace converted to upper")
         );
     }
 
@@ -35,7 +34,7 @@ class BaseRuleTest extends TestCase
         $rule = $this->getMockForAbstractClass(BaseRule::class);
         $this->assertEquals(
             "Replace Converted To Title",
-            $rule->keepCase("This Is Title Case", "replace converted to title")
+            $rule::keepCase("This Is Title Case", "replace converted to title")
         );
     }
 }
