@@ -11,7 +11,7 @@ class XRulesTest extends TestCase
     public function it_converts_xilófono_to_çilofono()
     {
         $xRules = new XRules();
-        $this->assertEquals('çilofono', $xRules->apply('xilófono'));
+        $this->assertEquals('çilófono', $xRules->apply('xilófono'));
         $this->assertEquals('Çilófono', $xRules->apply('Xilófono'));
     }
 
