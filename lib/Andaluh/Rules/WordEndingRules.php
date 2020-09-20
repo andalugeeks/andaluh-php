@@ -117,27 +117,27 @@ class WordEndingRules extends BaseRule
             return $match[0];
         }
 
-        $suffix_vowel_a = $match[2];
-        $suffix_d_char = $match[3];
-        $suffix_vowel_b =  $match[4];
-        $ending_s = $match['s'];
+        $suffixVowelA = $match[2];
+        $suffixDChar = $match[3];
+        $suffixVowelB =  $match[4];
+        $endingS = $match['s'];
 
-        $suffix = "{$suffix_vowel_a}{$suffix_d_char}{$suffix_vowel_b}{$ending_s}";
+        $suffix = "{$suffixVowelA}{$suffixDChar}{$suffixVowelB}{$endingS}";
 
         switch (self::toLowerCase($suffix)) {
             case 'ada':
-                return $prefix . self::keepCase($suffix_vowel_b, 'á');
+                return $prefix . self::keepCase($suffixVowelB, 'á');
             case 'adas':
                 return $prefix . self::keepCase(mb_substr($suffix, 0, 2), self::getVowelCircumflexs(mb_substr($suffix, 0, 1)) . 'h');
             case 'ado':
-                return $prefix . $suffix_vowel_a . $suffix_vowel_b;
+                return $prefix . $suffixVowelA . $suffixVowelB;
             case 'ados':
             case 'idos':
             case 'ídos':
-                return $prefix . self::getVowelTilde($suffix_vowel_a) . self::getVowelCircumflexs($suffix_vowel_b);
+                return $prefix . self::getVowelTilde($suffixVowelA) . self::getVowelCircumflexs($suffixVowelB);
             case 'ido':
             case 'ído':
-                return $prefix . self::keepCase($suffix_vowel_a, 'í') . $suffix_vowel_b;
+                return $prefix . self::keepCase($suffixVowelA, 'í') . $suffixVowelB;
             default:
                 return $match[0];
         }

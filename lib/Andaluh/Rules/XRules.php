@@ -20,16 +20,15 @@ class XRules extends BaseRule
                 # If the /ks/ sound is between vowels
                 # Axila => Aççila | Éxito => Éççito | Sexy => Çeççy
                 '/(a|e|i|o|u|á|é|í|ó|ú)(x)(a|e|i|o|u|y|á|é|í|ó|ú)/iu' => function ($match) use ($vaf) {
-                    $prev_char = $match[1];
-                    $x_char = $match[2];
-                    $next_char = $match[3];
-                    $prev_char = self::getVowelCircumflexs($prev_char);
+                    $prevChar = self::getVowelCircumflexs($match[1]);
+                    $xChar = $match[2];
+                    $nextChar = $match[3];
 
-                    if (self::isUpperCase($x_char)) {
+                    if (self::isUpperCase($xChar)) {
                         $upperVaf = self::toUpperCase($vaf);
-                        return "{$prev_char}{$upperVaf}{$upperVaf}{$next_char}";
+                        return "{$prevChar}{$upperVaf}{$upperVaf}{$nextChar}";
                     }
-                    return $prev_char . str_repeat($vaf, 2) . $next_char;
+                    return $prevChar . str_repeat($vaf, 2) . $nextChar;
                 },
                 // Every word starting with /ks/
                 // un çilófono Xungo. => un çilófono Chungo

@@ -121,11 +121,11 @@ abstract class BaseRule
             return $vowel;
         }
 
-        if (($notilde_index = mb_strpos($notildeVowels, $vowel)) === false) {
+        if (($notildeIndex = mb_strpos($notildeVowels, $vowel)) === false) {
             throw new \Exception('Not a vowel');
         }
 
-        return mb_substr($tildeVowels, $notilde_index, 1);
+        return mb_substr($tildeVowels, $notildeIndex, 1);
     }
 
     static function containsTildeVowel(string $text)

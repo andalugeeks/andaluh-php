@@ -41,14 +41,14 @@ class HRules extends BaseRule
                     return preg_replace_callback(
                         '/(?<!c)(h)(\w?)/iu',
                         function ($match) {
-                            $h_char = $match[1];
-                            $next_char = $match[2];
+                            $hChar = $match[1];
+                            $nextChar = $match[2];
 
-                            if ($next_char && self::isUpperCase($h_char)) {
-                                return self::toUpperCase($next_char);
+                            if ($nextChar && self::isUpperCase($hChar)) {
+                                return self::toUpperCase($nextChar);
                             }
-                            if ($next_char && self::isLowerCase($h_char)) {
-                                return self::toLowerCase($next_char);
+                            if ($nextChar && self::isLowerCase($hChar)) {
+                                return self::toLowerCase($nextChar);
                             }
 
                             return '';
