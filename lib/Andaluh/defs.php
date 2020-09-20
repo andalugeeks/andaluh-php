@@ -206,12 +206,6 @@ return [
         "zy"
     ],
 
-    'V_RULES_EXCEPT' => [
-        'vis' => 'bî',
-        'ves' => 'bêh'
-    ],
-
-
     'LL_RULES_EXCEPT' => [
         'grill' => 'grîh'
     ],
