@@ -12,6 +12,7 @@ class HRulesTest extends TestCase
     {
         $hRules = new HRules();
         $this->assertEquals('chiguagua', $hRules->apply('chihuahua'));
+        $this->assertEquals('Chiguagua', $hRules->apply('Chihuahua'));
     }
 
     /** @test */
@@ -19,5 +20,32 @@ class HRulesTest extends TestCase
     {
         $hRules = new HRules();
         $this->assertEquals('cacagüete', $hRules->apply('cacahuete'));
+        $this->assertEquals('Cacagüete', $hRules->apply('Cacahuete'));
+    }
+
+    /** @test */
+    public function it_converts_huelga_to_güelga()
+    {
+        $hRules = new HRules();
+        $this->assertEquals('güelga', $hRules->apply('huelga'));
+        $this->assertEquals('Güelga', $hRules->apply('Huelga'));
+    }
+
+    /** @test */
+    public function it_converts_hueco_to_güeco()
+    {
+        $hRules = new HRules();
+        $this->assertEquals('güeco', $hRules->apply('hueco'));
+        $this->assertEquals('Güeco', $hRules->apply('Hueco'));
+    }
+
+    /** @test */
+    public function it_runs_general_h_replacements()
+    {
+        $hRules = new HRules();
+        $this->assertEquals('ola', $hRules->apply('hola'));
+        $this->assertEquals('Acendado', $hRules->apply('Hacendado'));
+        $this->assertEquals('Acha', $hRules->apply('Hacha'));
+        $this->assertEquals('Ache', $hRules->apply('Hache'));
     }
 }
