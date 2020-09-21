@@ -30,7 +30,7 @@
         }
     },
     "scripts": {
-        "unit": "phpunit --testsuite unit",
-        "unit-debug": "phpunit --debug --testsuite unit"
+        "test": "phpunit --testsuite unit",
+        "test --debug": "phpunit --debug --testsuite unit"
     }
 }
