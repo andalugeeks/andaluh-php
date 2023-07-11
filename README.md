@@ -29,7 +29,7 @@ class MyClass
     {
         $andaluh = new Andaluh();
         // Transliterate to EPA proposal
-        echo 'EPA = '.$andaluh->transliterate_Epa(('Todo Xenomorfo dice: [haber], que el Éxito y el éxtasis asfixian, si no eres un xilófono Chungo.');
+        echo 'EPA = '.$andaluh->transliterate_Epa('Todo Xenomorfo dice: [haber], que el Éxito y el éxtasis asfixian, si no eres un xilófono Chungo.');
         // Transliterate to PAO proposal
         echo 'PAO = '.$andaluh->transliterate_Pao('Lleva un Guijarrito el ABuelo, ¡Qué Bueno! ¡para la VERGÜENZA!');
     }
