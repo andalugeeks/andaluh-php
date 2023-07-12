@@ -22,7 +22,7 @@
         {
             "name": "kuasarx",
             "homepage": "https://github.com/kuasarx"
-        },
+        }
     ],
     "require-dev": {
         "phpunit/phpunit": "^8.4"
