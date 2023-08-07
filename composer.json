@@ -14,6 +14,14 @@
         {
             "name": "LeonAlvarez",
             "homepage": "https://github.com/LeonAlvarez"
+        },
+        {
+            "name": "gongalf",
+            "homepage": "https://github.com/gongalf"
+        },
+        {
+            "name": "kuasarx",
+            "homepage": "https://github.com/kuasarx"
         }
     ],
     "require-dev": {

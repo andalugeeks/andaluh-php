@@ -1,6 +1,6 @@
 <?php
 
-namespace Andaluh\Rules;
+namespace Andaluh\Rules\PAO;
 
 class WordEndingRules extends BaseRule
 {
@@ -92,11 +92,13 @@ class WordEndingRules extends BaseRule
     {
         return preg_replace_callback_array(
             [
+                '/\b(\w*?)(i?d?)(ad)(e?s?)\b/iu' => [self::class, 'replaceIntervowelDADEndWithCase'],
                 '/\b(\w*?)(a|i|í|Í)(d)(o|a)(?P<s>s?)\b/iu' => [self::class, 'replaceIntervowelDEndWithCase'],
                 '/\b(\w+?)(e)(ps)\b/iu' => [self::class, 'replaceEpsEndWithCase'],
                 '/\b(\w+?)(a|e|i|o|u|á|é|í|ó|ú)(d)\b/iu' => [self::class, 'replaceDEndWithCase'],
-                '/\b(\w+?)(a|e|i|o|u|á|é|í|ó|ú)(s)\b/iu' => [self::class, 'replaceSEndWithCase'],
-                '/\b(\w+?)(a|e|i|o|u|á|é|í|ó|ú)(b|c|f|g|j|k|l|p|r|t|x|z)\b/iu' => [self::class, 'replaceConstEndWithCase'],
+                '/\b(\w+?)(a|e|i|o|u|á|é|í|ó|ú)(s|z|t)\b/iu' => [self::class, 'replaceSEndWithCase'],
+                '/\b(\w+?)(a|e|i|o|u|á|é|í|ó|ú)(b|c|f|g|j|k|l|p|r|x)\b/iu' => [self::class, 'replaceConstEndWithCase'],
+                '/\b(\w+?)(y)\b/iu' => [self::class, 'replaceYEndWithCase'],
             ],
             $text
         );
@@ -128,21 +130,59 @@ class WordEndingRules extends BaseRule
             case 'ada':
                 return $prefix . self::keepCase($suffixVowelB, 'á');
             case 'adas':
-                return $prefix . self::keepCase(mb_substr($suffix, 0, 2), self::getVowelCircumflexs(mb_substr($suffix, 0, 1)) . 'h');
+                return $prefix . self::keepCase(mb_substr($suffix, 0, 2), mb_substr($suffix, 0, 1) . 'h');
             case 'ado':
                 return $prefix . $suffixVowelA . $suffixVowelB;
             case 'ados':
+                return $prefix . $suffixVowelA . $suffixVowelB . 'h';
             case 'idos':
             case 'ídos':
-                return $prefix . self::getVowelTilde($suffixVowelA) . self::getVowelCircumflexs($suffixVowelB);
+            case 'idas':
+            case 'ídas':
+                return $prefix . self::getVowelTilde($suffixVowelA) . $suffixVowelB . 'h';
             case 'ido':
             case 'ído':
+            case 'ida':
+            case 'ída':
                 return $prefix . self::keepCase($suffixVowelA, 'í') . $suffixVowelB;
             default:
                 return $match[0];
         }
     }
 
+    private static function replaceIntervowelDADEndWithCase(array $match): string
+    {
+            $wordLower = self::toLowerCase($match[0]);
+            /* if (array_key_exists($wordLower, self::WORDEND_D_INTERVOWEL_RULES_EXCEPT)) {
+                return self::keepCase(
+                    $wordLower,
+                    self::WORDEND_D_INTERVOWEL_RULES_EXCEPT[$wordLower]
+                );
+            } */
+
+            $prefix = $match[1];
+            /* if (self::containsTildeVowel($prefix)) {
+                return $match[0];
+            } */
+
+            $suffix = $match[2] . $match[3] . $match[4];
+
+            switch (self::toLowerCase($suffix)) {
+                case "idad":
+                    return $prefix . self::keepCase($suffix, 'ìá');
+                case "idades":
+                    return $prefix . self::keepCase($suffix, 'ìaeh');
+                case "dad":
+                    return $prefix . self::keepCase($suffix, 'á');
+                case "dades":
+                case "ades":
+                    return $prefix . self::keepCase($suffix, 'aeh');
+                default:
+                    return $match[0];
+            }
+    }
+
+    // Como "bíceps"
     private static function replaceEpsEndWithCase(array $match): string
     {
         [
@@ -153,11 +193,17 @@ class WordEndingRules extends BaseRule
             $suffix_const
         ] = $match;
 
-        //  Leave as it is. There shouldn't be any word with -eps ending withough accent.
+        return self::isLowerCase($match[1])
+            ? $prefix . 'eh'
+            : $prefix . 'EH';
+
+        // return $prefix . 'eh';
+
+        /* //  Leave as it is. There shouldn't be any word with -eps ending withough accent.
         if (!self::containsTildeVowel($prefix)) {
             return "{$prefix}{$suffix_vowel}{$suffix_const}";
         }
-        return $prefix . self::keepCase($suffix_vowel, 'ê');
+        return $prefix . self::keepCase($suffix_vowel, 'ê'); */
     }
 
     private static function replaceDEndWithCase(array $match): string
@@ -183,6 +229,7 @@ class WordEndingRules extends BaseRule
 
         return "{$prefix}{$stressed}" . self::keepCase($suffix_const, 'h');
     }
+
     private static function replaceSEndWithCase(array $match): string
     {
         [$word, $prefix, $suffix_vowel, $suffix_const] = $match;
@@ -194,12 +241,14 @@ class WordEndingRules extends BaseRule
             );
         }
 
-        $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
+        return "{$prefix}{$suffix_vowel}" . self::keepCase($suffix_const, 'h');
+
+        /* $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
         if (!self::containsTildeVowel($suffix_vowel)) {
             return "{$prefix}{$unstressed}";
         }
 
-        return "{$prefix}{$unstressed}" . self::keepCase($suffix_const, 'h');
+        return "{$prefix}{$unstressed}" . self::keepCase($suffix_const, 'h'); */
     }
 
     private static function replaceConstEndWithCase(array $match): string
@@ -213,11 +262,37 @@ class WordEndingRules extends BaseRule
             );
         }
 
-        $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
+        return $prefix . self::UNSTRESSED_RULES[$suffix_vowel];
+
+        // $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
+        // return "{$prefix}{$unstressed}";
+
+        /* $unstressed = self::UNSTRESSED_RULES[$suffix_vowel];
         if (self::containsTildeVowel($prefix)) {
             return "{$prefix}{$unstressed}";
         }
 
-        return "{$prefix}{$unstressed}" . self::keepCase($suffix_const, 'h');
+        return "{$prefix}{$unstressed}" . self::keepCase($suffix_const, 'h'); */
     }
+
+    // Como "bíceps"
+    private static function replaceYEndWithCase(array $match): string
+        {
+            [
+                //$word,
+                ,
+                $prefix,
+                $suffix
+            ] = $match;
+
+            return self::isLowerCase($match[1])
+                ? $prefix . 'i'
+                : $prefix . 'I';
+
+            /* //  Leave as it is. There shouldn't be any word with -eps ending withough accent.
+            if (!self::containsTildeVowel($prefix)) {
+                return "{$prefix}{$suffix_vowel}{$suffix_const}";
+            }
+            return $prefix . self::keepCase($suffix_vowel, 'ê'); */
+        }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Andaluh\Rules;
+namespace Andaluh\Rules\PAO;
 
 abstract class BaseRule
 {
@@ -13,11 +13,13 @@ abstract class BaseRule
 
     # EPA character for Voiceless alveolar fricative /s/
     # https://en.wikipedia.org/wiki/Voiceless_alveolar_fricative
-    const VAF = 'ç';
+    const VAF = ''; // 'ç';
+    const VAF_S = 's';
+    const VAF_Z = 'z';
 
     # EPA character for Voiceless velar fricative /x/
     # https://en.wikipedia.org/wiki/Voiceless_velar_fricative
-    const VVF = 'h';
+    const VVF = 'j'; // 'h';
 
     static function keepCase(string $word, string $replacementWord): string
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Andaluh\Rules;
+namespace Andaluh\Rules\PAO;
 
 class GJRules extends BaseRule
 {
@@ -12,6 +12,11 @@ class GJRules extends BaseRule
 
     public static function apply(string $text, string $vvf = self::VVF): string
     {
+           if ($vvf=='') {
+                $vvf = "j";
+           }
+
+
         # Replacement rules for /∫/ (voiceless postalveolar fricative)
         return preg_replace_callback_array(
             [
@@ -25,6 +30,7 @@ class GJRules extends BaseRule
                 => function ($match) use ($vvf) {
                     return self::replaceWithHCase($match, $vvf);
                 },
+                /*
                 // GUE,GUI replacement
                 '/(g)u(e|i|é|í)/iu' => function ($match) {
                     return "{$match[1]}{$match[2]}";
@@ -34,17 +40,19 @@ class GJRules extends BaseRule
                     $middle_u = self::keepCase($match[2], 'u');
                     return "{$match[1]}{$middle_u}{$match[3]}";
                 },
+                */
                 // buen  => guen
-                '/(b)(uen)/iu' => function ($match) {
+                '/(bu)(en)/iu' => function ($match) {
                     return self::isLowerCase($match[1])
-                        ? "g{$match[2]}"
-                        : "G{$match[2]}";
+                        ? "gü{$match[2]}"
+                        : "GÜ{$match[2]}";
                 },
                 // abuel => aguel 
                 // sabues => sagues
                 '/(?P<s>s?)(?P<a>a?)(?<!m)(?P<b>b)(?P<ue>ue)(?P<const>l|s)/iu' => function ($match) {
                     $replacedB = self::keepCase($match['b'], 'g');
-                    return "{$match['s']}{$match['a']}{$replacedB}{$match['ue']}{$match['const']}";
+                    return "{$match['s']}{$match['a']}{$replacedB}üe{$match['const']}";
+                    // return "{$match['s']}{$match['a']}{$replacedB}{$match['ue']}{$match['const']}";
                 },
             ],
             $text

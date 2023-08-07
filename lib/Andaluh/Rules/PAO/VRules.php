@@ -1,6 +1,6 @@
 <?php
 
-namespace Andaluh\Rules;
+namespace Andaluh\Rules\PAO;
 
 class VRules extends BaseRule
 {

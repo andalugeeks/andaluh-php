@@ -1,19 +1,17 @@
 <?php
 
-namespace Andaluh\Rules;
+namespace Andaluh\Rules\PAO;
 
-class ChRules extends BaseRule
+class LRules extends BaseRule
 {
-
     public static function apply(string $text): string
     {
-        # Replacement rules for /∫/ (voiceless postalveolar fricative)
         return preg_replace_callback(
-            '/(c)(h)/iu',
+            '/(l)(b|c|ç|Ç|g|s|d|f|g|h|k|m|p|q|r|t|x|z)/iu',
             function ($match) {
                 return self::isLowerCase($match[1])
-                    ? 'x'
-                    : 'X';
+                    ? "r{$match[2]}"
+                    : "R{$match[2]}";
             },
             $text
         );
