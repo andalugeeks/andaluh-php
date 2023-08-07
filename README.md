@@ -1,6 +1,14 @@
 # andaluh-php
 Transliterate español (spanish) spelling to andaluz proposals using PHP
 
+## Table of Contents
+
+- [Description](#description)
+- [Usage](#usage)
+- [Installation](#installation)
+- [Support](#support)
+- [Contributing](#contributing)
+
 ## Description
 
 The **Andalusian varieties of [Spanish]** (Spanish: *andaluz*; Andalusian) are spoken in Andalusia, Ceuta, Melilla, and Gibraltar. They include perhaps the most distinct of the southern variants of peninsular Spanish, differing in many respects from northern varieties, and also from Standard Spanish. Further info: https://en.wikipedia.org/wiki/Andalusian_Spanish.
@@ -13,7 +21,7 @@ Further info:
 
 
 
-## Usage example
+## Usage
 
 ```php
 <?php
@@ -35,3 +43,17 @@ class MyClass
     }
 }      
 ```
+## Installation
+
+Install it with composser
+
+```bash
+composer require andalugeeks/andaluh
+```
+## Support
+
+Please [open an issue](https://github.com/andalugeeks/andaluh-php/issues/new) for support.
+
+## Contributing
+
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and open a pull request.
