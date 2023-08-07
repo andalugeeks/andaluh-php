@@ -1,3 +1,6 @@
+![Logo](andaluh-php-logo.jpg)
+
+
 # andaluh-php
 Transliterate español (spanish) spelling to andaluz proposals using PHP
 
