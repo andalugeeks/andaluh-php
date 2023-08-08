@@ -1,5 +1,16 @@
+![Logo](andaluh-php-logo.jpg)
+
+
 # andaluh-php
 Transliterate español (spanish) spelling to andaluz proposals using PHP
+
+## Table of Contents
+
+- [Description](#description)
+- [Usage](#usage)
+- [Installation](#installation)
+- [Support](#support)
+- [Contributing](#contributing)
 
 ## Description
 
@@ -13,7 +24,7 @@ Further info:
 
 
 
-## Usage example
+## Usage
 
 ```php
 <?php
@@ -35,3 +46,17 @@ class MyClass
     }
 }      
 ```
+## Installation
+
+Install it with composser
+
+```bash
+composer require andalugeeks/andaluh
+```
+## Support
+
+Please [open an issue](https://github.com/andalugeeks/andaluh-php/issues/new) for support.
+
+## Contributing
+
+Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and open a pull request.
